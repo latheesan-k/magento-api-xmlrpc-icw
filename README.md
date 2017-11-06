@@ -1,42 +1,81 @@
 # Magento XMLRPC API Wrapper
 
-This wrapper lets you talk to Magento via SOAP. This is the most reliable and up to date magento wrapper, with lots of bug fixes.
+Forked from https://www.npmjs.com/package/magento-api-xmlrpc, Updated by [Latheesan Kanesamoorthy](https://github.com/latheesan-k/magento-api-xmlrpc-icw) - specifically for Infinite Codeworks.
+
+This wrapper lets you talk to Magento v1.x via XMLRPC. This is the most reliable and up to date magento wrapper, with lots of bug fixes and extended support for Ebizmart SagePay api end-points.
 
 Original wrapper: bitbucket.org/icecom/magentoapi , developed by https://www.npmjs.com/~icecom and https://www.npmjs.com/~2ps. 
 
-This copy exists so I can rapidly fix any bugs I run into.
-
 ## Installation
 
-`npm install git+ssh://git@github.com/wolakec/magento-api-xmlrpc.git`
+`npm i -S magento-api-xmlrpc-icw`
 
 ## Usage
 
 ```js
-var MagentoAPI = require('magento-api');
-var magento = new MagentoAPI({
-  host: 'your.host',
-  port: 80,
-  path: '/api/xmlrpc/',
-  login: 'your_username',
-  pass: 'your_pass'
+const MagentoAPI = require('magento-api-xmlrpc-icw');
+
+const magentoAPI = new MagentoAPI({
+    host: 'shop-domain.com',
+    port: 80,
+    path: '/api/xmlrpc/',
+    login: 'api_username',
+    pass: 'api_password'
 });
 
-magento.login(function(err, sessId) {
-  if (err) {
-    // deal with error
-    return;
-  }
+magentoAPI.login((error, sessionId) =>
+{
+    // Error
+    if (error) {
+        console.log('error', error);
+        return;
+    }
 
-  // use magento
+    // Test
+    console.log('sessionId', sessionId);
+
+    // Rest of your code...
 });
 ```
 
 If need be, you can manually change the session id.
 
 ```js
-magento.changeSession(newSessionId);
+magentoAPI.changeSession(newSessionId);
 ```
+
+---
+
+## (Ebizmart) Sage Pay API Usage
+
+*List transactions*
+
+```js
+magentoAPI.sagePayTransaction.list((error, transactionList) => {
+    if (error) {
+        console.log('error', error);
+        return;
+    }
+    console.log(transactionList);
+});
+```
+
+*Transaction Info*
+
+```js
+let request = { 
+    'vpstxcode': 'EA049E74-A774-4322-80E6-1B317A90C2EB' 
+};
+magentoAPI.sagePayTransaction.info(request, (error, transactionInfo) => {
+    if (error) {
+        console.log('error', error);
+        return;
+    }
+    console.log(transactionInfo);
+});
+```
+
+---
 
 All of the API methods take an object of params as the first argument, and a callback as the second.
 
