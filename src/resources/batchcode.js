@@ -7,20 +7,20 @@ var prototypeBase = require('../prototype_base.js');
 var curry = require('../curry.js');
 
 function Batchcode() {
-  this.prefix = 'batchcode.';
+    this.prefix = 'batchcode.';
 }
 util.inherits(Batchcode, events.EventEmitter);
 
 // prototypes we will be applying
 var protos = {
-  batchcode: {
-    mandatory: 'shipmentId,sku,batchId,templateId'
-  }
+    batchcodeAssign: {
+        mandatory: 'itemsQty,orderIncrementId,templateID'
+    }
 };
 
 // creating prototypes using curry func
 for (var key in protos) {
-  Batchcode.prototype[key] = curry(prototypeBase, key, protos[key]);
+    Batchcode.prototype[key] = curry(prototypeBase, key, protos[key]);
 }
 protos = undefined;
 
