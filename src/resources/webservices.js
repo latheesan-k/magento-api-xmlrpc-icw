@@ -24,6 +24,10 @@ var protos = {
         mandatory: 'data',
     },
 
+    createNewFbaOrder: {
+        mandatory: 'data',
+    },
+
     syncConfigurableProduct: {
         mandatory: 'data',
     },

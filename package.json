@@ -2,7 +2,7 @@
     "name": "magento-api-xmlrpc-icw",
     "author": "Latheesan Kanesamoorthy <latheesan_k@hotmail.com>",
     "description": "Magento XMLRPC wrapper for Node.js. This is the most reliable and up to date wrapper, including bug fixes and extended feature support for Ebizmart SagePay api end-points.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "main": "./src/magento",
     "contributors": [
         {
